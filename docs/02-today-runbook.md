@@ -73,7 +73,7 @@ vcgencmd get_throttled              # 재부팅 직후 0x0 이어야 함 (sticky
   (1차 측정의 클럭 2400 MHz 는 OS 요청값이라 펌웨어 스로틀이 반영되지 않았음)
 
 ### (2) 파일 갱신 (노트북 → Pi)
-[01-pi-setup.md](01-pi-setup.md) '레포 옮기기'의 1)·2)·4) 다시 실행 (코드, ECAPA 모델, 음성 세트). 그다음 Pi 에서:
+[01-pi-setup.md](01-pi-setup.md) '레포 옮기기'의 1)·2)·4) 다시 실행 (코드 = `.git` 복사 후 `git reset --hard`, ECAPA 모델, 음성 세트). 그다음 Pi 에서:
 ```bash
 source ~/venvs/pdbench/bin/activate && cd ~/pd-dog-edge-bench
 pip install -r python/requirements-pi.txt     # vosk 추가됨

@@ -113,8 +113,11 @@ $DST = "pd-dog-edge-bench"     # Pi 홈 폴더 기준 상대경로 (= ~/pd-dog-e
 # 0) 폴더 만들기
 ssh -4 $PI "mkdir -p $DST/models/convert $DST/data/video $DST/data/audio"
 
-# 1) 코드 (.git 포함 → 결과에 커밋 해시 기록)
-scp -4 -r .git .gitignore README.md transfer.sha256 bench configs docs python tools "${PI}:${DST}/"
+# 1) 코드: .git 만 복사하고 Pi 에서 커밋된 그대로 풀기
+#    → 추적 파일이 빠짐없이 커밋과 같아져 결과 env.json 의 git_dirty=false (커밋하지 않은 변경은 옮겨지지 않음)
+#    → 모델·데이터·results 의 미추적 파일은 그대로 둠
+scp -4 -r .git transfer.sha256 "${PI}:${DST}/"
+ssh -4 $PI "cd $DST && git reset -q --hard HEAD && git log -1 --format='%h %s' && git status --short"
 
 # 2) 모델: 스크립트·메타 + ONNX 5개 + ECAPA 특징 상수
 scp -4 models/manifest.toml models/fetch.py models/yolo11n-pose_export.json models/ecapa_export.json models/yolo11n-pose_640_fp32.onnx models/yolo11n-pose_416_fp32.onnx models/yolo11n-pose_320_fp32.onnx models/silero_vad.onnx models/ecapa_tdnn_voxceleb_fp32.onnx models/ecapa_fbank.npz "${PI}:${DST}/models/"
@@ -135,7 +138,7 @@ Pi 에서 확인:
 cd ~/pd-dog-edge-bench && sha256sum -c transfer.sha256    # 모든 줄 OK
 ```
 - `transfer.sha256` 은 노트북에서 만든 체크섬 목록(git 제외 파일)
-- 옮긴 뒤 노트북에서 코드를 고치면 1)만 다시 실행
+- 옮긴 뒤 노트북에서 코드를 고치면 **커밋한 다음** 1)만 다시 실행 (마지막 `git status --short` 가 아무것도 출력하지 않으면 깨끗함)
 - GitHub 원격 저장소를 쓸 경우: 코드는 `git clone`, 2)의 ONNX 와 3)의 데이터 변환본만 scp
 
 ## 7. 측정 → [02-today-runbook.md](02-today-runbook.md) 로 이어서 진행
