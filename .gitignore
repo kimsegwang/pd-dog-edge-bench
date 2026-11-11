@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.venv*/
+venv/
+
+# Models (download/convert; see models/manifest.toml)
+models/*.onnx
+models/*.pt
+models/convert/*.pt
+models/vosk-model-*/
+models/vosk-model-*.zip
+data/voice/*/stream.wav
+data/voice/*/utts/
+data/voice/*/enroll/
+
+# Data (download/convert; see data/fetch_data.py)
+data/video/*
+data/audio/*
+!data/video/.gitkeep
+!data/audio/.gitkeep
+
+# Results: raw logs stay local, summaries are committed
+results/**/frames.csv
+results/**/system.csv
+results/**/audio.csv
+results/**/kpts.npy
+results/**/kpts.npz
+results/**/voice.csv
+
+# Rust
+rust/target/
+models/convert/_work/
+transfer.sha256
+models/*.npz
