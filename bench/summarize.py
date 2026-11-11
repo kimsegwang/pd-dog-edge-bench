@@ -296,22 +296,23 @@ def critical_section(vo: dict) -> list[str]:
 
 
 def section_B(runs: list[dict], crit: dict) -> list[str]:
-    base = [r for r in runs if not g(r, "pose", "fps_cap")]
+    base = [r for r in runs if not g(r, "pose", "fps_cap")] or runs  # 상한 실행만 있으면 그것으로
     if not base:
         return ["_시나리오 B 결과 없음_", ""]
     out = [
-        "포즈(최대 속도) + 음성 체인(wav 를 실시간 속도로 투입)을 한 프로세스에서 동시 실행.",
+        "포즈(최대 속도, 또는 FPS 상한) + 음성 체인(wav 를 실시간 속도로 투입)을 한 프로세스에서 동시 실행.",
         "발화→판정 = 정답 발화 끝 → 명령 판정 (VAD 만 측정한 실행은 VAD 종료 판정까지). "
         f"VAD lag 32 ms 초과 = 실시간 처리 실패. {UV} = 저전압 감지.",
         "",
-        "| 해상도 | 포즈 스레드 | 포즈 FPS | 1초 구간 FPS p5 | 포즈 전체 p95 (ms) | 발화→판정 p50 / p95 / 최대 (ms) | 명령 정답 | 잘못 수락 | VAD lag p95 / max (ms) | 전체 CPU 평균 (%) | 최대 RSS (MB) | 최고 온도 (°C) | 동시 ≥5 FPS | 경고 |",
-        "|---:|---:|---:|---:|---:|---|---:|---:|---|---:|---:|---:|:--:|---|",
+        "| 해상도 | 포즈 스레드 | FPS 상한 | 포즈 FPS | 1초 구간 FPS p5 | 포즈 전체 p95 (ms) | 발화→판정 p50 / p95 / 최대 (ms) | 명령 정답 | 잘못 수락 | VAD lag p95 / max (ms) | 전체 CPU 평균 (%) | 최대 RSS (MB) | 최고 온도 (°C) | 동시 ≥5 FPS | 경고 |",
+        "|---:|---:|---:|---:|---:|---:|---|---:|---:|---|---:|---:|---:|:--:|---|",
     ]
     for r in base:
         p, v, s = r["pose"], r["vad"], r.get("system", {})
         ok = PASS if (p.get("fps") or 0) >= crit["pose_min_fps"] else FAIL
         out.append(
-            f"| {p['res']} | {p['threads']} | {fps_cell(r)} | {f(p.get('window_fps_p5'), 1)} | {f(g(p, 'total_ms', 'p95'))} "
+            f"| {p['res']} | {p['threads']} | {f(p.get('fps_cap'), 0) if p.get('fps_cap') else '없음'} | {fps_cell(r)} "
+            f"| {f(p.get('window_fps_p5'), 1)} | {f(g(p, 'total_ms', 'p95'))} "
             f"| {voice_cells(r)} | {f(g(v, 'lag_ms', 'p95'))} / {f(g(v, 'lag_ms', 'max'))} "
             f"| {f(s.get('cpu_total_mean'), 0)} | {f(r.get('peak_rss_mb'), 0)} | {f(s.get('temp_c_max'))} | {ok} | {flag_cell(r)} |")
     return out + [""]
@@ -370,7 +371,7 @@ def section_C(runs: list[dict]) -> list[str]:
 
 def verdict(runs: dict, crit: dict, ref: dict) -> list[str]:
     C = runs["C"][-1] if runs["C"] else None
-    B = [r for r in runs["B"] if not g(r, "pose", "fps_cap")]
+    B = [r for r in runs["B"] if not g(r, "pose", "fps_cap")] or runs["B"]  # 상한 실행만 있으면 그것으로
     V = runs["V"][-1] if runs["V"] else None
     rows = []
     best = max(B, key=lambda r: r["pose"]["fps"]) if B else None
@@ -379,7 +380,8 @@ def verdict(runs: dict, crit: dict, ref: dict) -> list[str]:
     if src:
         fps = src["pose"]["fps"]
         tag = (f"C({C['pose']['res']}/{C['pose']['threads']}스레드, {C['duration_s'] / 60:.0f}분)" if C
-               else f"B 최고 {best['pose']['res']}/{best['pose']['threads']}스레드")
+               else f"B 최고 {best['pose']['res']}/{best['pose']['threads']}스레드"
+               + (f" (상한 {best['pose']['fps_cap']:g} FPS)" if best["pose"].get("fps_cap") else ""))
         rows.append(("포즈 추정: 동시 실행 ≥ {:.0f} FPS".format(crit["pose_min_fps"]), "초안",
                      f"{tag} {fps:.2f} FPS" + (f" {UV}" if uv(src) else ""), PASS if fps >= crit["pose_min_fps"] else FAIL))
         ok_runs = [r for r in B if r["pose"]["fps"] >= crit["pose_min_fps"]]
@@ -486,7 +488,8 @@ def main() -> int:
     lines += ["## 시나리오 A — 포즈 단독 (해상도 × 스레드)", ""] + section_A(runs["A"], crit_all["draft"], vis_thr)
     lines += ["## 시나리오 V — 음성 명령 체인 단독", ""] + section_V(runs["V"])
     lines += ["## 시나리오 B — 포즈 + 음성 동시 실행", ""] + section_B(runs["B"], crit_all["draft"])
-    full_B = [r for r in runs["B"] if r.get("voice") and not g(r, "pose", "fps_cap")]
+    full_B = ([r for r in runs["B"] if r.get("voice") and not g(r, "pose", "fps_cap")]
+              or [r for r in runs["B"] if r.get("voice")])
     if full_B:
         worst = max(full_B, key=lambda r: r["voice"]["e2e_cmd_ms"].get("max") or 0)
         lines += ["### B 중 발화→판정이 가장 느린 조합의 단계별 지연", ""] + voice_detail(worst)
