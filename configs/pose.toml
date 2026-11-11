@@ -1,0 +1,15 @@
+# YOLO11n-pose 설정 (Python/Rust 공통)
+[model]
+# {res} 자리에 640/416/320 이 들어감. models/convert/export_yolo_pose.py 가 만든 파일명과 일치
+path_template = "models/yolo11n-pose_{res}_fp32.onnx"
+conf_threshold = 0.25
+iou_threshold = 0.45
+max_det = 10
+kpt_conf_threshold = 0.5   # 키포인트 정확도 비교 시 '보이는' 키포인트 기준
+pad_value = 114
+
+[ort]
+intra_op_threads = 4       # 시나리오에서 덮어씀
+inter_op_threads = 1
+graph_optimization = "all" # disable | basic | extended | all
+allow_spinning = true      # ORT 기본값. false 면 대기 스레드가 CPU를 덜 씀 (동시 실행 실험용)

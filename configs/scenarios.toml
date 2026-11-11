@@ -1,0 +1,41 @@
+# 측정 매트릭스. 경로는 레포 루트 기준. 실행 순서: A → V → B(+FPS 상한) → C
+[common]
+frames = "data/video/urfd_fall-01-cam0.rgb"
+wav = "data/audio/silero_test_16k.wav"   # voice="vad" 일 때만 사용. full 은 configs/voice.toml 의 dataset/stream.wav
+warmup_frames = 20
+warmup_chunks = 30
+cooldown_temp_c = 50.0     # 각 실행 전 이 온도 아래로 내려갈 때까지 대기
+cooldown_timeout_s = 600    # 쿨러 없이 식는 데 오래 걸릴 수 있어 넉넉히. 초과 시 그대로 시작하고 결과에 표시
+monitor_interval_s = 1.0
+
+[A]  # 포즈 단독
+resolutions = [640, 416, 320]
+threads = [1, 2, 3, 4]
+measure_frames = 300
+max_measure_s = 45         # 시간 상한. 단, 입력 영상 한 바퀴(160 프레임)는 상한과 관계없이 채움 (해상도 간 정확도 비교용)
+
+[V]  # 음성 명령 체인 단독 (VAD + Vosk + ECAPA, 포즈 없음) — 각 단계 지연의 기준값
+vad_threads = 1
+duration_s = 150           # 테스트 스트림(TTS 세트 약 143초) 한 바퀴 — 세트가 길어지면 늘릴 것
+
+[B]  # 포즈(최대 속도) + 음성 명령 체인 동시
+resolutions = [640, 416, 320]
+pose_threads = [2, 3, 4]
+vad_threads = 1
+voice = "full"             # full = VAD + Vosk + ECAPA (발화 종료 → 명령 판정까지), vad = VAD 만
+duration_s = 150           # 테스트 스트림 한 바퀴 (모든 발화를 한 번씩)
+
+[Bcap]  # 포즈 FPS 상한 — 같은 해상도/스레드의 상한 없는 B 와 CPU·온도 비교 (B 단계에서 함께 실행)
+fps_caps = [10]
+resolutions = [416, 320]   # 상한(10)보다 빨리 돌 수 있는 해상도만
+pose_threads = [2, 3]
+
+[C]  # 장시간 = 시나리오 B 설정 하나를 길게
+# "auto": 같은 세션의 B 결과 중 통과 기준(FPS)을 만족하는 가장 높은 해상도/그때 가장 빠른 스레드 수
+resolution = "auto"
+pose_threads = "auto"
+fallback_resolution = 416
+fallback_pose_threads = 3
+vad_threads = 1
+fps_cap = 0                # 실제 운용 설정으로 오래 돌리려면 10 등으로
+duration_s = 1800

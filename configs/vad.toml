@@ -1,0 +1,17 @@
+# Silero VAD 설정 (Python/Rust 공통)
+[model]
+path = "models/silero_vad.onnx"
+sample_rate = 16000
+chunk_samples = 512        # 32 ms
+context_samples = 64       # Silero v5 16kHz 입력 = context 64 + chunk 512
+
+[segmenter]
+threshold = 0.5
+neg_threshold = 0.35
+min_silence_ms = 300       # 발화 종료 판정에 필요한 무음 길이 → '발화 종료 → 판정' 지연에 그대로 포함됨
+
+[ort]
+intra_op_threads = 1
+inter_op_threads = 1
+graph_optimization = "all"
+allow_spinning = true

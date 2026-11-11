@@ -1,0 +1,18 @@
+# 통과 기준. [draft] = 사용자 초안(판정에 사용), [ref] = 계획서의 보조 제안(참고 표시만)
+[draft]
+pose_min_fps = 5.0                 # 동시 실행(B/C) 상태의 처리 FPS
+voice_max_end_to_decision_s = 1.0  # 오늘은 VAD 구간만 측정 → '부분 측정'
+longrun_min_minutes = 30
+longrun_allow_throttle = false     # get_throttled 현재 비트(저전압/클럭제한/스로틀/소프트온도) 한 번도 없어야 함
+max_rss_mb = 3072
+
+[ref]
+pose_window_fps_p5 = 5.0           # 1초 구간 FPS의 하위 5% 도 5 이상
+pose_total_latency_p95_ms = 300
+max_temp_c = 75.0
+max_cpu_total_pct = 75.0
+max_rss_mb = 1536
+
+[flags]  # 측정 중 이 조건이 생기면 해당 결과에 경고 표시 (결과는 남기되 해석 주의)
+max_temp_c = 80.0                  # Pi 5 는 약 80°C 부터 클럭을 낮추기 시작
+# throttled 값이 0x0 이 아니게 되면 항상 표시, 시작 온도가 cooldown_temp_c 를 넘었으면(대기 시간 초과) 표시

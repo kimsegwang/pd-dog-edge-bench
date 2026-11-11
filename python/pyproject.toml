@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pdbench"
+version = "0.1.0"
+description = "pd-dog-edge-bench: Raspberry Pi 5 CPU-only AI benchmark (Python side)"
+requires-python = ">=3.11"
+# 의존성은 의도적으로 비워 둠: numpy/opencv/psutil 은 apt 시스템 패키지를 써야 하므로
+# `pip install -e python --no-deps` 로 설치하고, onnxruntime 은 requirements-pi.txt 로 설치.
+dependencies = []
+
+[tool.setuptools.packages.find]
+include = ["pdbench*"]

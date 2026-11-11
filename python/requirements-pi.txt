@@ -1,0 +1,4 @@
+# Pi venv(--system-site-packages)에서 pip 으로 설치하는 것만.
+# numpy / opencv / psutil 은 apt(python3-numpy, python3-opencv, python3-psutil) 버전을 사용 — 여기에 넣지 말 것.
+onnxruntime>=1.20
+vosk==0.3.45
