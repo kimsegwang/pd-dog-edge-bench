@@ -1,0 +1,8 @@
+# 줄 끝을 LF 로 고정: Windows 노트북에서 체크아웃해도 CRLF 로 바뀌지 않게 해서
+# scp 로 Pi 에 옮긴 작업 트리가 git 저장소와 같게 유지 (결과 env.json 의 git_dirty 방지)
+* text=auto eol=lf
+*.ps1 text eol=crlf
+*.onnx binary
+*.npz binary
+*.wav binary
+*.rgb binary
