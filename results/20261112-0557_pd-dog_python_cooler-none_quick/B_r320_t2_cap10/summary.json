@@ -1,0 +1,409 @@
+{
+  "scenario": "B",
+  "lang": "python",
+  "cooler": "none",
+  "frames_file": "urfd_fall-01-cam0.rgb",
+  "duration_s": 150.0,
+  "pose": {
+    "res": 320,
+    "threads": 2,
+    "fps_cap": 10.0,
+    "model": "yolo11n-pose_320_fp32.onnx",
+    "model_sha256": "19bc33695da5c79966a86fb5c25c4a701b06e3a9bc929762bfec4ccbd2a269a6",
+    "load_ms": 83.759265,
+    "frames": 1501,
+    "elapsed_s": 150.051311772,
+    "fps": 10.003244771900027,
+    "window_fps_p5": 9.0,
+    "window_fps_p50": 10.0,
+    "read_ms": {
+      "n": 1501,
+      "mean": 0.21538772884743507,
+      "p50": 0.206536,
+      "p95": 0.261,
+      "max": 0.758535,
+      "min": 0.173167
+    },
+    "pre_ms": {
+      "n": 1501,
+      "mean": 0.8560673477681545,
+      "p50": 0.838943,
+      "p95": 0.964202,
+      "max": 1.832904,
+      "min": 0.814961
+    },
+    "infer_ms": {
+      "n": 1501,
+      "mean": 50.023775576282475,
+      "p50": 49.596519,
+      "p95": 52.600571,
+      "max": 57.477583,
+      "min": 49.345518
+    },
+    "post_ms": {
+      "n": 1501,
+      "mean": 0.2846890979347102,
+      "p50": 0.293499,
+      "p95": 0.328037,
+      "max": 0.601425,
+      "min": 0.055667
+    },
+    "total_ms": {
+      "n": 1501,
+      "mean": 51.16453202198534,
+      "p50": 50.727406,
+      "p95": 53.75342,
+      "max": 58.808892,
+      "min": 50.258185
+    },
+    "detect_rate": 0.9400399733510992,
+    "frames_covered": 160,
+    "frames_in_source": 160
+  },
+  "mode": "full",
+  "wav": "stream.wav",
+  "vad": {
+    "model": "silero_vad.onnx",
+    "model_sha256": "2623a2953f6ff3d2c1e61740c6cdb7168133479b267dfef114a4a3cc5bdd788f",
+    "threads": 1,
+    "chunks": 4688,
+    "chunk_ms": 32.0,
+    "infer_ms": {
+      "n": 4688,
+      "mean": 0.6714239411262799,
+      "p50": 0.628934,
+      "p95": 1.11373405,
+      "max": 5.857803,
+      "min": 0.369092
+    },
+    "lag_ms": {
+      "n": 4688,
+      "mean": 0.7482649313139932,
+      "p50": 0.7093445,
+      "p95": 1.2051208999999998,
+      "max": 5.919909,
+      "min": 0.433829
+    },
+    "late_chunks_pct": 0.0,
+    "speech_segments": 45,
+    "end_decision_ms": {
+      "n": 45,
+      "mean": 320.75933333333336,
+      "p50": 320.73,
+      "p95": 321.062,
+      "max": 321.24,
+      "min": 320.49
+    },
+    "min_silence_ms": 300
+  },
+  "voice": {
+    "dataset": "tts_heami",
+    "commands": {
+      "chulbal": {
+        "phrase": "출발",
+        "min_word_conf": 0.7,
+        "spk_threshold": 0.25,
+        "exact": false,
+        "critical": false,
+        "group": "go"
+      },
+      "geotja": {
+        "phrase": "걷자",
+        "min_word_conf": 0.7,
+        "spk_threshold": 0.25,
+        "exact": false,
+        "critical": false,
+        "group": "go"
+      },
+      "meomchwo": {
+        "phrase": "멈춰",
+        "min_word_conf": 0.7,
+        "spk_threshold": 0.25,
+        "exact": false,
+        "critical": false,
+        "group": null
+      },
+      "anja": {
+        "phrase": "앉아",
+        "min_word_conf": 0.7,
+        "spk_threshold": 0.25,
+        "exact": false,
+        "critical": false,
+        "group": null
+      },
+      "ireona": {
+        "phrase": "일어나",
+        "min_word_conf": 0.7,
+        "spk_threshold": 0.25,
+        "exact": false,
+        "critical": false,
+        "group": null
+      },
+      "dowajwo": {
+        "phrase": "도와줘",
+        "min_word_conf": 0.9,
+        "spk_threshold": 0.35,
+        "exact": true,
+        "critical": true,
+        "group": null
+      }
+    },
+    "spk_threshold": 0.25,
+    "vosk_model": "vosk-model-small-ko-0.22",
+    "ecapa_model": "ecapa_tdnn_voxceleb_fp32.onnx",
+    "ecapa_sha256": "96d9913d889f36516f4f4095c298200e0369809bfe1163bbe36c7283a734b443",
+    "n_enroll": 5,
+    "enroll_ms": 3024.334777,
+    "vosk_load_ms": 1606.659859,
+    "ecapa_load_ms": 152.159097,
+    "segments": 45,
+    "matched": 45,
+    "spurious": 0,
+    "expected_utts": 45,
+    "missed_utts": 0,
+    "e2e_ms": {
+      "n": 45,
+      "mean": 510.2271675777778,
+      "p50": 508.528798,
+      "p95": 568.0754407999999,
+      "max": 610.056106,
+      "min": 454.310621
+    },
+    "e2e_cmd_ms": {
+      "n": 30,
+      "mean": 501.12296369999996,
+      "p50": 502.52887499999997,
+      "p95": 527.0165049499999,
+      "max": 556.047836,
+      "min": 462.280043
+    },
+    "vad_end_ms": {
+      "n": 45,
+      "mean": 359.3870879777778,
+      "p50": 359.382969,
+      "p95": 376.735244,
+      "max": 378.316682,
+      "min": 327.357716
+    },
+    "queue_wait_ms": {
+      "n": 45,
+      "mean": 1.648722111111111,
+      "p50": 0.383629,
+      "p95": 8.620306399999999,
+      "max": 11.349035,
+      "min": 0.196259
+    },
+    "vosk_final_ms": {
+      "n": 45,
+      "mean": 16.125094333333333,
+      "p50": 15.176379,
+      "p95": 23.234887999999994,
+      "max": 24.605473,
+      "min": 12.41807
+    },
+    "ecapa_ms": {
+      "n": 45,
+      "mean": 133.06626315555556,
+      "p50": 130.12893,
+      "p95": 183.3449406,
+      "max": 244.783925,
+      "min": 96.306806
+    },
+    "vosk_accept_total_ms": {
+      "n": 45,
+      "mean": 33.544087044444446,
+      "p50": 33.852031,
+      "p95": 45.3651762,
+      "max": 53.410386,
+      "min": 23.904235
+    },
+    "cmd_utts": 30,
+    "cmd_correct": 29,
+    "cmd_accepted_correct": 27,
+    "neg_utts": 15,
+    "false_accepts": 0,
+    "spk_score_target": {
+      "n": 39,
+      "mean": 0.44359663816598743,
+      "p50": 0.4489705562591553,
+      "p95": 0.6058180689811706,
+      "max": 0.6420964598655701,
+      "min": 0.1163325309753418
+    },
+    "spk_score_other": {
+      "n": 6,
+      "mean": 0.17984248946110407,
+      "p50": 0.17648130655288696,
+      "p95": 0.20980047807097435,
+      "max": 0.21887674927711487,
+      "min": 0.1550290286540985
+    },
+    "per_command": {
+      "chulbal": {
+        "phrase": "출발",
+        "critical": false,
+        "group": "go",
+        "rules": {
+          "min_word_conf": 0.7,
+          "spk_threshold": 0.25,
+          "exact": false
+        },
+        "utts": 5,
+        "correct": 4,
+        "confused": 0,
+        "missed": 1,
+        "missed_reasons": {
+          "speaker": 1
+        },
+        "false_from_other_cmd": 0,
+        "false_from_noncmd": 0
+      },
+      "geotja": {
+        "phrase": "걷자",
+        "critical": false,
+        "group": "go",
+        "rules": {
+          "min_word_conf": 0.7,
+          "spk_threshold": 0.25,
+          "exact": false
+        },
+        "utts": 5,
+        "correct": 4,
+        "confused": 0,
+        "missed": 1,
+        "missed_reasons": {
+          "no_match": 1
+        },
+        "false_from_other_cmd": 0,
+        "false_from_noncmd": 0
+      },
+      "meomchwo": {
+        "phrase": "멈춰",
+        "critical": false,
+        "group": null,
+        "rules": {
+          "min_word_conf": 0.7,
+          "spk_threshold": 0.25,
+          "exact": false
+        },
+        "utts": 5,
+        "correct": 5,
+        "confused": 0,
+        "missed": 0,
+        "missed_reasons": {},
+        "false_from_other_cmd": 0,
+        "false_from_noncmd": 0
+      },
+      "anja": {
+        "phrase": "앉아",
+        "critical": false,
+        "group": null,
+        "rules": {
+          "min_word_conf": 0.7,
+          "spk_threshold": 0.25,
+          "exact": false
+        },
+        "utts": 5,
+        "correct": 5,
+        "confused": 0,
+        "missed": 0,
+        "missed_reasons": {},
+        "false_from_other_cmd": 0,
+        "false_from_noncmd": 0
+      },
+      "ireona": {
+        "phrase": "일어나",
+        "critical": false,
+        "group": null,
+        "rules": {
+          "min_word_conf": 0.7,
+          "spk_threshold": 0.25,
+          "exact": false
+        },
+        "utts": 5,
+        "correct": 5,
+        "confused": 0,
+        "missed": 0,
+        "missed_reasons": {},
+        "false_from_other_cmd": 0,
+        "false_from_noncmd": 0
+      },
+      "dowajwo": {
+        "phrase": "도와줘",
+        "critical": true,
+        "group": null,
+        "rules": {
+          "min_word_conf": 0.9,
+          "spk_threshold": 0.35,
+          "exact": true
+        },
+        "utts": 5,
+        "correct": 4,
+        "confused": 0,
+        "missed": 1,
+        "missed_reasons": {
+          "speaker": 1
+        },
+        "false_from_other_cmd": 0,
+        "false_from_noncmd": 0
+      }
+    },
+    "critical_false_accepts": [],
+    "critical_strict_rejects": [
+      {
+        "utt": "u031",
+        "file": "target__dowajwo__05.wav",
+        "speaker": "target",
+        "label_cmd": "dowajwo",
+        "cmd": "dowajwo",
+        "raw_cmd": "dowajwo",
+        "reject": "speaker",
+        "text": "도와줘",
+        "cmd_conf": 1.0,
+        "spk_score": 0.3463267982006073
+      }
+    ]
+  },
+  "peak_rss_mb": 901.890625,
+  "system": {
+    "samples": 157,
+    "cpu_total_mean": 33.78662420382165,
+    "cpu_total_max": 48.0,
+    "cpu_total_min": 5.3,
+    "proc_cpu_mean": 132.9299363057325,
+    "proc_cpu_max": 191.0,
+    "proc_cpu_min": 21.0,
+    "temp_c_mean": 60.74363057324841,
+    "temp_c_max": 70.5,
+    "temp_c_min": 50.7,
+    "arm_freq_mhz_mean": 2400.0271816560507,
+    "arm_freq_mhz_max": 2400.03712,
+    "arm_freq_mhz_min": 2400.017408,
+    "rss_mb_mean": 896.0745222929937,
+    "rss_mb_max": 900.5,
+    "rss_mb_min": 575.9,
+    "sys_mem_used_mb_mean": 1025.0828025477706,
+    "sys_mem_used_mb_max": 1050.0,
+    "sys_mem_used_mb_min": 731.0,
+    "swap_used_mb_mean": 0.0,
+    "swap_used_mb_max": 0.0,
+    "swap_used_mb_min": 0.0,
+    "ext5v_v_mean": 4.865624203821656,
+    "ext5v_v_max": 5.03,
+    "ext5v_v_min": 4.754,
+    "throttle_now_bits_or": "0x0",
+    "throttle_events": [],
+    "throttle_samples": 0,
+    "throttled_start_hex": "0xf0000",
+    "throttled_last_hex": "0xf0000",
+    "throttled_values": [
+      "0xf0000"
+    ]
+  },
+  "temp_before_cooldown_c": 77.1,
+  "temp_at_start_c": 47.95,
+  "cooldown_wait_s": 90.0,
+  "flags": [
+    "throttled=0xf0000 (측정 전부터 남아 있던 값)"
+  ]
+}
