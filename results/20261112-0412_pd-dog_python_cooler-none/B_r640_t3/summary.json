@@ -1,0 +1,139 @@
+{
+  "scenario": "B",
+  "lang": "python",
+  "cooler": "none",
+  "frames_file": "urfd_fall-01-cam0.rgb",
+  "wav_file": "silero_test_16k.wav",
+  "duration_s": 60.0,
+  "pose": {
+    "res": 640,
+    "threads": 3,
+    "model": "yolo11n-pose_640_fp32.onnx",
+    "model_sha256": "827cae8b1449221ac7994d5ba2d8f7128fb935b56d877f7e2cb50b31e53e8a60",
+    "load_ms": 83.668667,
+    "frames": 338,
+    "elapsed_s": 60.238358321,
+    "fps": 5.611042688096766,
+    "window_fps_p5": 5.0,
+    "window_fps_p50": 6.0,
+    "read_ms": {
+      "n": 338,
+      "mean": 0.30053502071005916,
+      "p50": 0.299101,
+      "p95": 0.33733435,
+      "max": 0.391795,
+      "min": 0.211739
+    },
+    "pre_ms": {
+      "n": 338,
+      "mean": 2.3367843846153846,
+      "p50": 2.184241,
+      "p95": 3.4077447999999997,
+      "max": 3.708152,
+      "min": 2.032899
+    },
+    "infer_ms": {
+      "n": 338,
+      "mean": 175.19081525443787,
+      "p50": 163.65974649999998,
+      "p95": 213.810634,
+      "max": 220.681194,
+      "min": 162.519927
+    },
+    "post_ms": {
+      "n": 338,
+      "mean": 0.3496557159763314,
+      "p50": 0.3238135,
+      "p95": 0.5864292,
+      "max": 0.682127,
+      "min": 0.070999
+    },
+    "total_ms": {
+      "n": 338,
+      "mean": 177.87725535502958,
+      "p50": 166.154819,
+      "p95": 216.39464615,
+      "max": 224.920141,
+      "min": 164.814936
+    },
+    "detect_rate": 0.9408284023668639
+  },
+  "vad": {
+    "model": "silero_vad.onnx",
+    "model_sha256": "2623a2953f6ff3d2c1e61740c6cdb7168133479b267dfef114a4a3cc5bdd788f",
+    "threads": 1,
+    "chunks": 1875,
+    "chunk_ms": 32.0,
+    "infer_ms": {
+      "n": 1875,
+      "mean": 1.1781459248000001,
+      "p50": 1.041533,
+      "p95": 2.2279261,
+      "max": 11.207603,
+      "min": 0.627535
+    },
+    "lag_ms": {
+      "n": 1875,
+      "mean": 1.2999428144,
+      "p50": 1.153679,
+      "p95": 2.3988989,
+      "max": 11.319149,
+      "min": 0.70867
+    },
+    "late_chunks_pct": 0.0,
+    "speech_segments": 11,
+    "end_decision_ms": {
+      "n": 11,
+      "mean": 321.2263636363636,
+      "p50": 321.31,
+      "p95": 321.755,
+      "max": 321.89,
+      "min": 320.79
+    },
+    "min_silence_ms": 300
+  },
+  "peak_rss_mb": 283.265625,
+  "system": {
+    "samples": 64,
+    "cpu_total_mean": 74.675,
+    "cpu_total_max": 76.0,
+    "cpu_total_min": 48.0,
+    "proc_cpu_mean": 301.746875,
+    "proc_cpu_max": 305.9,
+    "proc_cpu_min": 191.0,
+    "temp_c_mean": 69.11640625,
+    "temp_c_max": 80.4,
+    "temp_c_min": 54.55,
+    "arm_freq_mhz_mean": 2400.0,
+    "arm_freq_mhz_max": 2400.0,
+    "arm_freq_mhz_min": 2400.0,
+    "rss_mb_mean": 281.73125,
+    "rss_mb_max": 282.6,
+    "rss_mb_min": 270.6,
+    "sys_mem_used_mb_mean": 472.5625,
+    "sys_mem_used_mb_max": 487.0,
+    "sys_mem_used_mb_min": 467.0,
+    "swap_used_mb_mean": 0.0,
+    "swap_used_mb_max": 0.0,
+    "swap_used_mb_min": 0.0,
+    "throttle_now_bits_or": "0x5",
+    "throttle_events": [
+      "under-voltage",
+      "throttled"
+    ],
+    "throttle_samples": 10,
+    "throttled_start_hex": "0xf0000",
+    "throttled_last_hex": "0xf0000",
+    "throttled_values": [
+      "0xf0000",
+      "0xf0005"
+    ]
+  },
+  "temp_before_cooldown_c": 57.85,
+  "temp_at_start_c": 48.5,
+  "cooldown_wait_s": 5.0,
+  "flags": [
+    "온도 80.4°C > 80°C",
+    "throttled=0xf0000/0xf0005"
+  ]
+}

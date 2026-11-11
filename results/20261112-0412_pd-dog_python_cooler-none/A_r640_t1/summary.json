@@ -1,0 +1,96 @@
+{
+  "scenario": "A",
+  "lang": "python",
+  "cooler": "none",
+  "frames_file": "urfd_fall-01-cam0.rgb",
+  "pose": {
+    "res": 640,
+    "threads": 1,
+    "model": "yolo11n-pose_640_fp32.onnx",
+    "model_sha256": "827cae8b1449221ac7994d5ba2d8f7128fb935b56d877f7e2cb50b31e53e8a60",
+    "load_ms": 61.827587,
+    "frames": 124,
+    "elapsed_s": 45.100503243,
+    "fps": 2.7494149972538477,
+    "window_fps_p5": 2.0,
+    "window_fps_p50": 3.0,
+    "read_ms": {
+      "n": 124,
+      "mean": 0.33826225806451615,
+      "p50": 0.3368225,
+      "p95": 0.36601265,
+      "max": 0.419351,
+      "min": 0.295166
+    },
+    "pre_ms": {
+      "n": 124,
+      "mean": 2.1268424516129034,
+      "p50": 2.129686,
+      "p95": 2.1566734,
+      "max": 2.182046,
+      "min": 2.094436
+    },
+    "infer_ms": {
+      "n": 124,
+      "mean": 360.8917256774194,
+      "p50": 360.846386,
+      "p95": 361.33644525,
+      "max": 362.100612,
+      "min": 360.334916
+    },
+    "post_ms": {
+      "n": 124,
+      "mean": 0.31864841935483873,
+      "p50": 0.33092449999999995,
+      "p95": 0.3730424,
+      "max": 0.390999,
+      "min": 0.077945
+    },
+    "total_ms": {
+      "n": 124,
+      "mean": 363.3372165483871,
+      "p50": 363.2997835,
+      "p95": 363.80289925,
+      "max": 364.582491,
+      "min": 362.61111
+    },
+    "detect_rate": 0.9274193548387096
+  },
+  "peak_rss_mb": 256.984375,
+  "system": {
+    "samples": 53,
+    "cpu_total_mean": 24.739622641509435,
+    "cpu_total_max": 25.5,
+    "cpu_total_min": 9.9,
+    "proc_cpu_mean": 98.86792452830188,
+    "proc_cpu_max": 102.0,
+    "proc_cpu_min": 40.0,
+    "temp_c_mean": 57.7877358490566,
+    "temp_c_max": 61.7,
+    "temp_c_min": 49.6,
+    "arm_freq_mhz_mean": 2400.0,
+    "arm_freq_mhz_max": 2400.0,
+    "arm_freq_mhz_min": 2400.0,
+    "rss_mb_mean": 256.4566037735849,
+    "rss_mb_max": 256.7,
+    "rss_mb_min": 255.2,
+    "sys_mem_used_mb_mean": 453.7358490566038,
+    "sys_mem_used_mb_max": 474.0,
+    "sys_mem_used_mb_min": 442.0,
+    "swap_used_mb_mean": 0.0,
+    "swap_used_mb_max": 0.0,
+    "swap_used_mb_min": 0.0,
+    "throttle_now_bits_or": "0x0",
+    "throttle_events": [],
+    "throttle_samples": 0,
+    "throttled_start_hex": "0x0",
+    "throttled_last_hex": "0x0",
+    "throttled_values": [
+      "0x0"
+    ]
+  },
+  "temp_before_cooldown_c": 49.6,
+  "temp_at_start_c": 49.6,
+  "cooldown_wait_s": 0.0,
+  "flags": []
+}

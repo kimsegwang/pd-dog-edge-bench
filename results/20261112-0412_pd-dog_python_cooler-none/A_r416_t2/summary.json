@@ -1,0 +1,98 @@
+{
+  "scenario": "A",
+  "lang": "python",
+  "cooler": "none",
+  "frames_file": "urfd_fall-01-cam0.rgb",
+  "pose": {
+    "res": 416,
+    "threads": 2,
+    "model": "yolo11n-pose_416_fp32.onnx",
+    "model_sha256": "786246a829ff600a1fb81718f3bb2534ce47a88974c8bb1dbf451181b80d07af",
+    "load_ms": 75.752495,
+    "frames": 300,
+    "elapsed_s": 25.936261951,
+    "fps": 11.566817167669498,
+    "window_fps_p5": 11.0,
+    "window_fps_p50": 12.0,
+    "read_ms": {
+      "n": 300,
+      "mean": 0.27982931333333333,
+      "p50": 0.277971,
+      "p95": 0.30727795,
+      "max": 0.38048,
+      "min": 0.249573
+    },
+    "pre_ms": {
+      "n": 300,
+      "mean": 1.5015660133333333,
+      "p50": 1.497957,
+      "p95": 1.5488747,
+      "max": 1.748178,
+      "min": 1.440346
+    },
+    "infer_ms": {
+      "n": 300,
+      "mean": 84.35854022666666,
+      "p50": 84.324266,
+      "p95": 84.72927405,
+      "max": 85.33116,
+      "min": 83.98511
+    },
+    "post_ms": {
+      "n": 300,
+      "mean": 0.27797183999999997,
+      "p50": 0.307776,
+      "p95": 0.34078765,
+      "max": 0.700978,
+      "min": 0.070463
+    },
+    "total_ms": {
+      "n": 300,
+      "mean": 86.13807808,
+      "p50": 86.09299,
+      "p95": 86.57659305,
+      "max": 87.077783,
+      "min": 85.607567
+    },
+    "detect_rate": 0.8533333333333334
+  },
+  "peak_rss_mb": 217.890625,
+  "system": {
+    "samples": 28,
+    "cpu_total_mean": 50.43214285714286,
+    "cpu_total_max": 51.8,
+    "cpu_total_min": 35.5,
+    "proc_cpu_mean": 201.10357142857143,
+    "proc_cpu_max": 204.0,
+    "proc_cpu_min": 142.0,
+    "temp_c_mean": 67.84821428571429,
+    "temp_c_max": 73.25,
+    "temp_c_min": 56.2,
+    "arm_freq_mhz_mean": 2400.0,
+    "arm_freq_mhz_max": 2400.0,
+    "arm_freq_mhz_min": 2400.0,
+    "rss_mb_mean": 217.525,
+    "rss_mb_max": 217.6,
+    "rss_mb_min": 217.4,
+    "sys_mem_used_mb_mean": 407.5,
+    "sys_mem_used_mb_max": 413.0,
+    "sys_mem_used_mb_min": 402.0,
+    "swap_used_mb_mean": 0.0,
+    "swap_used_mb_max": 0.0,
+    "swap_used_mb_min": 0.0,
+    "throttle_now_bits_or": "0x0",
+    "throttle_events": [],
+    "throttle_samples": 0,
+    "throttled_start_hex": "0xf0000",
+    "throttled_last_hex": "0xf0000",
+    "throttled_values": [
+      "0xf0000"
+    ]
+  },
+  "temp_before_cooldown_c": 61.7,
+  "temp_at_start_c": 49.6,
+  "cooldown_wait_s": 20.0,
+  "flags": [
+    "throttled=0xf0000 (측정 전부터 남아 있던 값)"
+  ]
+}
