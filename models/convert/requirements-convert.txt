@@ -1,0 +1,6 @@
+# 노트북(x86) 전용. PyTorch 는 여기서만 사용.
+# torch CPU 판:  pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+ultralytics
+onnx
+onnxslim
+onnxruntime

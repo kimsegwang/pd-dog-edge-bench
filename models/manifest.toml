@@ -1,0 +1,37 @@
+# 모델 출처와 무결성. 실행 시 sha256 은 env.json/summary.json 에 기록됨.
+# 바이너리(.onnx/.pt)는 git 에 넣지 않음.
+
+[silero_vad]
+file = "models/silero_vad.onnx"
+url = "https://github.com/snakers4/silero-vad/raw/v5.1.2/src/silero_vad/data/silero_vad.onnx"
+sha256 = "2623a2953f6ff3d2c1e61740c6cdb7168133479b267dfef114a4a3cc5bdd788f"
+license = "MIT"
+where = "pi"       # Pi 에서 models/fetch.py 로 직접 받음
+
+[yolo11n_pose]
+source_url = "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n-pose.pt"
+files = [
+  "models/yolo11n-pose_640_fp32.onnx",
+  "models/yolo11n-pose_416_fp32.onnx",
+  "models/yolo11n-pose_320_fp32.onnx",
+]
+license = "AGPL-3.0 (Ultralytics) — 제품화 시 라이선스 검토 필요"
+where = "laptop"   # models/convert/export_yolo_pose.py 로 변환 후 scp
+# sha256 은 export 시 models/yolo11n-pose_export.json 에 기록됨
+
+[vosk_small_ko]
+file = "models/vosk-model-small-ko-0.22.zip"
+url = "https://alphacephei.com/vosk/models/vosk-model-small-ko-0.22.zip"
+sha256 = "eea36124087fed26c59996a4761519458e3bd185e8ea9d9865ad8760c4a1d989"
+extract_to = "models/vosk-model-small-ko-0.22"
+license = "Apache-2.0"
+where = "pi"       # Pi 에서 models/fetch.py 로 받고 압축 해제 (87MB)
+
+[ecapa_tdnn]
+source = "speechbrain/spkrec-ecapa-voxceleb (Hugging Face)"
+files = [
+  "models/ecapa_tdnn_voxceleb_fp32.onnx",
+  "models/ecapa_fbank.npz",
+]
+license = "Apache-2.0"
+where = "laptop"   # models/convert/export_ecapa.py 로 변환 후 scp. sha256·검증 결과는 models/ecapa_export.json
