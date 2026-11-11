@@ -1,0 +1,59 @@
+# 음성 명령 체인: Silero VAD → (발화 구간) → Vosk 명령 인식 + ECAPA 화자 확인 → 판정
+# 명령 수락 = 명령어 인식(단어 신뢰도 ≥ min_word_conf, exact 규칙) && 등록 화자 일치(코사인 ≥ spk_threshold)
+# 명령별로 min_word_conf / spk_threshold / exact 를 덮어쓸 수 있음 (없으면 [vosk]/[ecapa] 기본값)
+
+# ---- 명령어 ----------------------------------------------------------------------------------
+# 표 이름(commands.<키>) = 데이터 파일 이름에 쓰는 라벨, phrase = Vosk 문법에 넣을 말 (띄어쓰기 = 여러 단어)
+# '가자' 는 vosk-model-small-ko-0.22 어휘에 없어 제외. 대체 후보 '출발'·'걷자' 를 둘 다 측정한 뒤 하나로 확정 예정.
+
+[commands.chulbal]
+phrase = "출발"
+group = "go"              # '가자' 대체 후보 1 (같은 group = 같은 동작의 후보들)
+
+[commands.geotja]
+phrase = "걷자"
+group = "go"              # '가자' 대체 후보 2
+
+[commands.meomchwo]
+phrase = "멈춰"
+
+[commands.anja]
+phrase = "앉아"
+
+[commands.ireona]
+phrase = "일어나"
+
+[commands.dowajwo]
+phrase = "도와줘"
+critical = true           # 잘못 수락 = 거짓 위급 알림 → 보고서에서 따로 표시
+min_word_conf = 0.9       # 기본 0.7 보다 엄격
+spk_threshold = 0.35      # 기본 0.25 보다 엄격
+exact = true              # 인식 결과가 '도와줘'(반복 허용)만이어야 수락. 다른 단어가 섞이면 거부 (예: "자 도와줘")
+
+# ---- 인식기 ----------------------------------------------------------------------------------
+[vosk]
+model_dir = "models/vosk-model-small-ko-0.22"
+min_word_conf = 0.7       # 명령 단어 신뢰도 기본 기준
+# small-ko 모델에는 [unk] 가 없어 명령 아닌 말이 명령으로 끼워 맞춰짐 → 명령과 발음이 겹치지 않는 일반 단어를 문법에 섞어 흡수
+# (TTS 세트에서 '한'·'자'·'다' 같은 짧은 음절은 '앉아'·'가자'를 빼앗아 제외함)
+# '더워'·'도라지'·'돈'·'도와줄'·'도와준'·'도와주' 는 '도와줘'와 발음이 비슷한 말(예: "도와줄까")을 흡수하려고 추가
+fillers = ["네", "아니", "안녕하세요", "물", "밥", "오늘", "내일", "좋아", "싫어", "그래", "뭐", "어디",
+           "텔레비전", "줘", "이거", "좀", "시장", "더워", "도라지", "돈", "도와줄", "도와준", "도와주"]
+
+[ecapa]
+model = "models/ecapa_tdnn_voxceleb_fp32.onnx"
+fbank = "models/ecapa_fbank.npz"
+threshold = 0.25          # 코사인 유사도 기본 기준 — 실제 녹음으로 보정 필요
+min_segment_ms = 400      # 이보다 짧은 구간은 화자 판정 불가로 처리
+
+[ecapa.ort]
+intra_op_threads = 1
+inter_op_threads = 1
+graph_optimization = "all"
+allow_spinning = true
+
+[pipeline]
+preroll_ms = 300          # VAD 시작 판정 이전 오디오도 인식기에 넣음 (말머리 잘림 방지)
+# build_command_stream.py 결과(stream.wav, stream_labels.csv, enroll/) 가 있는 폴더.
+# 실행 시 --voice-set 으로 바꿀 수 있음 (예: data/voice/my_voice)
+dataset = "data/voice/tts_heami"

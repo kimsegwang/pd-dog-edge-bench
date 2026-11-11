@@ -1,0 +1,74 @@
+{
+  "source": "speechbrain/spkrec-ecapa-voxceleb",
+  "license": "Apache-2.0",
+  "opset": 17,
+  "speechbrain": "1.1.2",
+  "torch": "2.15.0+cpu",
+  "host": "Windows-11-10.0.26200-SP0",
+  "onnx": {
+    "file": "ecapa_tdnn_voxceleb_fp32.onnx",
+    "sha256": "96d9913d889f36516f4f4095c298200e0369809bfe1163bbe36c7283a734b443",
+    "bytes": 83411606,
+    "input": "feats (1, frames, 80) \u2014 sentence mean-normalized log-mel",
+    "output": "embedding (1, 192)"
+  },
+  "fbank": {
+    "file": "ecapa_fbank.npz",
+    "sha256": "a3ac03fb00c2c965391cafa227ef141a3a3d94deaf27d7e855e56b1a1508eda1",
+    "sample_rate": 16000,
+    "n_fft": 400,
+    "win_length": 400,
+    "hop_length": 160,
+    "center": true,
+    "pad_mode": "constant",
+    "top_db": 80.0,
+    "amin": 1e-10,
+    "multiplier": 10.0,
+    "db_multiplier": 0.0,
+    "n_mels": 80
+  },
+  "verification": [
+    {
+      "input": "other__none__01.wav",
+      "frames": 139,
+      "cosine_vs_speechbrain": 1.0,
+      "max_abs_diff": 0.000396728515625
+    },
+    {
+      "input": "other__none__02.wav",
+      "frames": 147,
+      "cosine_vs_speechbrain": 1.0,
+      "max_abs_diff": 0.0007076263427734375
+    },
+    {
+      "input": "other__none__03.wav",
+      "frames": 156,
+      "cosine_vs_speechbrain": 1.0000001192092896,
+      "max_abs_diff": 0.0002899169921875
+    },
+    {
+      "input": "other__none__04.wav",
+      "frames": 157,
+      "cosine_vs_speechbrain": 1.0,
+      "max_abs_diff": 0.000415802001953125
+    },
+    {
+      "input": "other__none__05.wav",
+      "frames": 138,
+      "cosine_vs_speechbrain": 1.0,
+      "max_abs_diff": 0.000415802001953125
+    },
+    {
+      "input": "target__anja__01.wav",
+      "frames": 184,
+      "cosine_vs_speechbrain": 1.0,
+      "max_abs_diff": 0.000335693359375
+    },
+    {
+      "input": "noise_1.5s",
+      "frames": 151,
+      "cosine_vs_speechbrain": 1.0,
+      "max_abs_diff": 8.392333984375e-05
+    }
+  ]
+}
